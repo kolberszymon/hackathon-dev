@@ -59,8 +59,9 @@ class Postprocessing {
   updateIotObjects(objects) {
     if (objects) {
       this.outlineObjects = objects;
-      this.outlinePass.selectedObjects = this.outlineObjects;
+      this.outlinePass.selectedObjects = objects;
       this.outlinePass.visibleEdgeColor.set("#ff0000");
+      console.log(this.outlinePass);
     }
   }
 

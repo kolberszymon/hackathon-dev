@@ -4,6 +4,7 @@ import { createScene } from "./components/scene.js";
 import { createLights, updateLights } from "./components/lights.js";
 import { createContext, updateContext } from "./components/context.js";
 import { createBoundingBox } from "./components/box.js";
+import { Postprocessing } from "./systems/postprocessing.js";
 
 //systems
 import { createRenderer } from "./systems/renderer.js";
@@ -35,7 +36,8 @@ class Viewer {
     this.objectManager = new ObjectManager(
       this.camera,
       this.scene,
-      this.container
+      this.container,
+      this.renderer
     );
     this.container.append(this.renderer.domElement);
     this.object = null;
@@ -43,6 +45,12 @@ class Viewer {
     this.navigation = null;
     that = this;
     this.init();
+    this.postprocessing = new Postprocessing(
+      this.container,
+      this.scene,
+      this.camera,
+      this.renderer
+    );
   }
 
   //init animation loop
@@ -82,7 +90,6 @@ class Viewer {
 
   //load new objects to the scene
   loadObjects(newObjects) {
-    // console.log(newObjects);
     this.object = updateBVH(newObjects);
     this.scene.add(this.object);
     this.box = createBoundingBox(this.object);
@@ -114,7 +121,7 @@ class Viewer {
       this.box = createBoundingBox(context);
 
       const boxBuilding = createBoundingBox(building);
-      // console.log(building);
+
       //fit camera to objects
 
       // console.log(boxBuilding, this.box);
@@ -126,10 +133,9 @@ class Viewer {
       //create context and lights !SHOULD BE UPDATED!
       createContext(this.scene, this.box);
       createLights(this.scene, this.box);
-      console.log("Here");
 
       //update size of AA
-      //this.postprocessing.updateSize(this.box)
+      // this.postprocessing.updateSize(this.box);
     }
   }
 
@@ -157,19 +163,6 @@ class Viewer {
     this.objectManager.transform = this.transform;
     this.transform.setSpace("world");
     this.scene.add(this.transform);
-  }
-
-  createIotManager() {
-    const iotObjects = this.objectManager.getByLayer("iot");
-    this.iotManager = new IotManager(
-      this.scene,
-      this.layersStructure,
-      this.renderer.domElement,
-      iotObjects,
-      this.camera
-    );
-    this.objectManager.updateIotObjects();
-    this.postprocessing.updateIotObjects(iotObjects);
   }
 
   updateLayersStructure(layersStructure) {
@@ -235,15 +228,18 @@ class Viewer {
     this.availableApartaments = availableApartaments.map((o) => o.description);
   }
   updateFlats(object) {
+    const flats = [];
     this.availableApartaments.forEach((name) => {
-      console.log(name);
-
-      const availableFlatMesh = object.children.find((flat) => {
-        flat.name === name;
-      });
+      const availableFlatMesh = object.children.find(
+        (flat) => flat.name === name
+      );
 
       availableFlatMesh.isAvailableForSell = true;
+      flats.push(availableFlatMesh);
     });
+
+    this.postprocessing.updateIotObjects(flats);
+    this.postprocessing.toggleAmbientOclussion();
   }
 }
 

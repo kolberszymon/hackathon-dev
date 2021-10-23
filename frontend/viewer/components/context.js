@@ -24,8 +24,8 @@ function createContext(scene, box) {
   size.x > size.y ? (dim = size.x) : (dim = size.y);
 
   //grid helper
-  const light = 0xffffff;
-  const dark = 0xffffff;
+  const light = 0xebebeb;
+  const dark = 0xebebeb;
   const fitOffset = 3;
   const fitOffsetGrid = 1.4;
   grid = new GridHelper(fitOffsetGrid * dim, 30, dark, light);

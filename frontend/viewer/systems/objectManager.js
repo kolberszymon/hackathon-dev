@@ -2,10 +2,11 @@ import { Raycaster, Vector2, Vector3, MeshStandardMaterial } from "three";
 import { materialSelected, materialStandard } from "../components/materials.js";
 
 class ObjectManager {
-  constructor(camera, scene, container) {
+  constructor(camera, scene, container, renderer) {
     this.raycaster = new Raycaster();
     this.mouse = new Vector2();
     this.container = container;
+    this.renderer = renderer;
     this.camera = camera;
     this.scene = scene;
     this.object = null;
@@ -17,7 +18,14 @@ class ObjectManager {
     this.iotToggle = null;
     this.transform = null;
     this.sellMaterial = new MeshStandardMaterial({
-      color: 0xd1fae5,
+      color: 0xa7f3d0,
+      side: 2,
+      flatShading: true,
+      transparent: true,
+      opacity: 1,
+    });
+    this.unavailableMaterial = new MeshStandardMaterial({
+      color: 0xfefefe,
       side: 2,
       flatShading: true,
       transparent: true,
@@ -63,7 +71,7 @@ class ObjectManager {
         //if not selected
       } else {
         if (this.selected[0]) {
-          this.selected[0].material = materialStandard;
+          this.adjustMaterial(this.selected[0]);
         }
         this.selected = [object];
         object.material = materialSelected;
@@ -167,13 +175,9 @@ class ObjectManager {
     if (o.geometry && o.geometry.attributes.color) {
       this.updateMaterialToNonStandard(o);
     } else {
-      o.material = materialStandard;
-
       // console.log(o.isAvailableForSell);
 
-      if (o.isAvailableForSell) {
-        o.material = this.sellMaterial;
-      }
+      this.adjustMaterial(o);
 
       if (o.context) {
         o.material = new MeshStandardMaterial({
@@ -258,5 +262,15 @@ class ObjectManager {
       this.selected.push(o);
     });
   };
+
+  adjustMaterial(o) {
+    if (o.isAvailableForSell) {
+      o.material = this.sellMaterial;
+    }
+
+    if (!o.isAvailableForSell) {
+      o.material = this.unavailableMaterial;
+    }
+  }
 }
 export { ObjectManager };

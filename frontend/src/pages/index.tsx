@@ -23,7 +23,7 @@ let availableApartments = [
   },
   {
     name: "Apartment #20",
-    description: "Cube.020_Cube.021",
+    description: "Cube.034_Cube.035",
     price: "15 ETH",
     isAvailableForSell: true,
   },
