@@ -56,7 +56,10 @@ class ObjectManager {
 
         //if not selected
       } else {
-        this.selected.push(object);
+        if (this.selected[0]) {
+          this.selected[0].material = materialStandard;
+        }
+        this.selected = [object];
         object.material = materialSelected;
       }
     }
@@ -123,8 +126,6 @@ class ObjectManager {
           .computeBoundsTree();
       }
       this.transform.attach(object);
-
-      console.log(this.selected);
     }
   }
 
@@ -138,8 +139,6 @@ class ObjectManager {
   updateObjects(objects) {
     // console.log(objects);
     this.objectsArray = objects.children;
-
-    console.log(this.objectsArray);
 
     for (let o of this.objectsArray) {
       //if we are dealing with one of the results
@@ -188,8 +187,6 @@ class ObjectManager {
     }
     const uuids = objectsArray.map((o) => o.uuid);
 
-    console.log(uuids);
-
     for (const id of uuids) {
       const object = this.scene.children[0].children.find((c) => c.uuid === id);
       if (object.geometry) {
@@ -200,7 +197,6 @@ class ObjectManager {
       }
       this.scene.children[0].remove(object);
       this.scene.remove(object);
-      console.log(object);
     }
     this.selected = [];
   };
