@@ -20,9 +20,9 @@ const MetaMaskButton: React.FC<MetaMaskButtonProps> = ({
       onKeyDown={() => handleClick()}
       tabIndex={0}
       type="button"
-      disabled={!!accounts.length}
+      disabled={accounts && !!accounts.length}
     >
-      {accounts.length > 0 ? "Connected" : "Connect wallet"}
+      {accounts && accounts.length > 0 ? "Connected" : "Connect wallet"}
     </button>
   );
 };
