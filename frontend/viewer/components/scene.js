@@ -1,12 +1,12 @@
-import { Color, Scene, Object3D, Vector3 } from 'three'
+import { Color, Scene, Object3D, Vector3 } from "three";
 
 function createScene() {
-  const scene = new Scene()
+  const scene = new Scene();
 
-  scene.background = new Color(0x061639)
-  Object3D.DefaultUp = new Vector3(0, 0, 1)
+  scene.background = new Color(0xdbdbdb);
+  Object3D.DefaultUp = new Vector3(0, 0, 1);
 
-  return scene
+  return scene;
 }
 
-export { createScene }
+export { createScene };

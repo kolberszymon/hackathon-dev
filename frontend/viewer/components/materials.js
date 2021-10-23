@@ -22,7 +22,7 @@ const materialDraw = new MeshStandardMaterial({
 
 const materialSelected = new MeshStandardMaterial({
   name: "materialSelected",
-  color: 0x60a5fa,
+  color: 0x34d399,
   opacity: 0.9,
   transparent: true,
   side: 2,

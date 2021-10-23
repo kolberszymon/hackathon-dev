@@ -1,19 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-
-/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: ['./src/components/**/*.{ts,tsx,js,jsx}', './src/pages/**/*.{ts,tsx,js,jsx}'],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
-      },
-    },
+    extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  variants: {},
+  plugins: [],
 }
