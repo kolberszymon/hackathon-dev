@@ -58,5 +58,12 @@
     -webkit-box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
     -moz-box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
     box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
+    transition: 1s all;
+    width: 16rem;
+  }
+
+  .nosidebar {
+    width: 0;
+    transition: 1s all;
   }
 }

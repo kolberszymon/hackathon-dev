@@ -14,15 +14,32 @@ type NftItem = {
   description: string;
 };
 
+let availableApartments = [
+  {
+    name: "Apartment #19",
+    description: "Cube.019_Cube.020",
+    price: "10 ETH",
+    isAvailableForSell: true,
+  },
+  {
+    name: "Apartment #20",
+    description: "Cube.020_Cube.021",
+    price: "15 ETH",
+    isAvailableForSell: true,
+  },
+];
+
 export default function Home() {
+  const developerAccount: string = "0x399B4B77538DC5b9A02319507d5E5C01B39D8607";
   const { accounts, provider, currentAcc } = useEthContext();
   const [nfts, setNfts] = useState<Array<NftItem>>();
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [selectedApartment, setSelectedApartment] = useState<any>();
+  const [apartmentData, setApartmentData] = useState<any>();
 
   const containerRef = useRef(null);
 
   useEffect(() => {
+    fetchNftByOwner();
     initThreeJs();
     window.addEventListener("ApartmentChangeEvent", (event) => {
       //@ts-ignore
@@ -40,7 +57,11 @@ export default function Home() {
   }, [currentAcc]);
 
   useEffect(() => {
-    console.log(selectedApartment);
+    setApartmentData(
+      availableApartments.filter(
+        (nft) => nft.description === selectedApartment
+      )[0]
+    );
   }, [selectedApartment]);
 
   const initThreeJs = async () => {
@@ -53,17 +74,18 @@ export default function Home() {
   };
 
   const fetchNftByOwner = async () => {
+    console.log("fetching");
     // Get nft by owner https://api-reference.rarible.com/#operation/getNftItemsByOwner
     const { data }: any = await axios.get(
       currentChainInfo.apiDomain + "/protocol/v0.1/ethereum/nft/items/byOwner",
       {
         params: {
-          owner: currentAcc,
+          owner: developerAccount,
         },
       }
     );
 
-    setIsLoading(false);
+    console.log(data.items);
 
     //Filtering fetched items by properties we need
     // There's no sense in having them all
@@ -88,7 +110,7 @@ export default function Home() {
 
   return (
     <div className="flex items-center p-4 mx-auto min-h-screen w-screen justify-center relative">
-      <Sidebar />
+      <Sidebar data={apartmentData} />
       <MetaMaskButton onClick={handleConnectWallet} accounts={accounts} />
       <div className="absolute flex h-full w-full justify-center">
         <div
