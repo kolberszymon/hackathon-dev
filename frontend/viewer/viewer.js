@@ -82,7 +82,7 @@ class Viewer {
 
   //load new objects to the scene
   loadObjects(newObjects) {
-    console.log(newObjects);
+    // console.log(newObjects);
     this.object = updateBVH(newObjects);
     this.scene.add(this.object);
     this.box = createBoundingBox(this.object);
@@ -113,11 +113,8 @@ class Viewer {
 
       this.box = createBoundingBox(context);
 
-      // console;
-      // context.material.color.set();
-
       const boxBuilding = createBoundingBox(building);
-      console.log(building);
+      // console.log(building);
       //fit camera to objects
 
       // console.log(boxBuilding, this.box);
