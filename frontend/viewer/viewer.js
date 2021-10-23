@@ -126,6 +126,7 @@ class Viewer {
       //create context and lights !SHOULD BE UPDATED!
       createContext(this.scene, this.box);
       createLights(this.scene, this.box);
+      console.log("Here");
 
       //update size of AA
       //this.postprocessing.updateSize(this.box)

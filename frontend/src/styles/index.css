@@ -53,4 +53,10 @@
   .max-h-80 {
     max-height: 80vh;
   }
+
+  .sidebar {
+    -webkit-box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
+    -moz-box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
+    box-shadow: -5px 0px 32px -16px rgba(52, 211, 153, 1);
+  }
 }

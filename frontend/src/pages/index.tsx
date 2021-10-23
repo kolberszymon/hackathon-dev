@@ -18,11 +18,16 @@ export default function Home() {
   const { accounts, provider, currentAcc } = useEthContext();
   const [nfts, setNfts] = useState<Array<NftItem>>();
   const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [selectedApartment, setSelectedApartment] = useState<any>();
 
   const containerRef = useRef(null);
 
   useEffect(() => {
     initThreeJs();
+    window.addEventListener("ApartmentChangeEvent", (event) => {
+      //@ts-ignore
+      setSelectedApartment(event.detail);
+    });
   }, []);
 
   useEffect(() => {
@@ -34,10 +39,12 @@ export default function Home() {
     // fetchNftByOwner();
   }, [currentAcc]);
 
+  useEffect(() => {
+    console.log(selectedApartment);
+  }, [selectedApartment]);
+
   const initThreeJs = async () => {
-    console.log(containerRef.current);
     const viewer = new Viewer(containerRef.current);
-    console.log(viewer);
 
     // @ts-ignore
     viewer.loadObj("/citychain.obj", false);
@@ -81,13 +88,13 @@ export default function Home() {
 
   return (
     <div className="flex items-center p-4 mx-auto min-h-screen w-screen justify-center relative">
+      <Sidebar />
       <MetaMaskButton onClick={handleConnectWallet} accounts={accounts} />
       <div className="absolute flex h-full w-full justify-center">
         <div
           ref={containerRef}
           className="w-full border-l-2 box-border bg-gray-500"
         ></div>
-        <Sidebar />
       </div>
     </div>
   );
