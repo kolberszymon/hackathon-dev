@@ -35,9 +35,7 @@ export default function Home() {
   }, [currentAcc]);
 
   const initThreeJs = async () => {
-    console.log(containerRef.current);
     const viewer = new Viewer(containerRef.current);
-    console.log(viewer);
 
     // @ts-ignore
     viewer.loadObj("/citychain.obj", false);
