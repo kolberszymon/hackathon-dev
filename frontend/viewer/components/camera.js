@@ -20,7 +20,7 @@ function createCamera() {
   return camera;
 }
 
-function updateCamera(camera, controls, box, fitOffset = 1.6) {
+function updateCamera(camera, controls, box, fitOffset = 2) {
   let size = box.getSize(new Vector3());
   let center = box.getCenter(new Vector3());
 
@@ -40,7 +40,7 @@ function updateCamera(camera, controls, box, fitOffset = 1.6) {
 
   camera.near = distance / 100;
   camera.far = distance * 100;
-  camera.updateProjectionMatrix();
+  // camera.updateProjectionMatrix();
   camera.position.copy(controls.target).sub(direction);
 
   controls.update();

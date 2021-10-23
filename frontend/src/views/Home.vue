@@ -1,22 +1,27 @@
 <script setup>
 import { Viewer } from "../../viewer/viewer.js";
 import ButtonRepo from "@/components/ButtonRepo.vue";
-import { computed, ref } from "@vue/reactivity";
+import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
+import { BoxGeometry, Mesh, MeshStandardMaterial } from "three";
 
 const container = ref(null);
 
 onMounted(() => {
   const viewer = new Viewer(container.value);
+  const geometry = new BoxGeometry(1, 1, 1);
+  const material = new MeshStandardMaterial({ color: 0xfbbf24 });
+  const cube = new Mesh(geometry, material);
+  cube.receiveShadow = true;
+  cube.castShadow = true;
+
+  console.log(cube);
+  viewer.addObjects(cube);
 });
 </script>
 
 <template>
-  <div class="bg-gray-100">
-    <div class="flex mt-8 lg:flex-shrink-0 lg:mt-0">
-      <ButtonRepo />
-      <div class="flex"></div>
-      <div ref="container" class="w-full border-l-2 box-border"></div>
-    </div>
+  <div class="absolute flex h-full w-full justify-center">
+    <div ref="container" class="w-full border-l-2 box-border bg-gray-500"></div>
   </div>
 </template>
