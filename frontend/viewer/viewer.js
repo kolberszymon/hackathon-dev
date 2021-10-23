@@ -213,23 +213,34 @@ class Viewer {
 
         if (selectable) {
           building = object;
+          that.createListOfFlats(object);
+
           that.addObjects(object);
         }
         if (!selectable) {
           context = object;
+          object.children[0].context = true;
           that.addObjects(object);
         }
         // return object;
       },
 
-      function (xhr) {
-        // console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      // called when loading has errors
-      function (error) {
-        console.log(error);
-      }
+      function (xhr) {},
+
+      function (error) {}
     );
+  }
+
+  createListOfFlats(building) {
+    // console.log(building);
+    // const appartments = [];
+    building.children.forEach((f) => {
+      f.isAvailableForSell = Math.random() < 0.5;
+
+      // const flat = { name: f.name, mesh: f, isForSell: true };
+      // appartments.push(flat);
+    });
+    // console.log(appartments);
   }
 }
 

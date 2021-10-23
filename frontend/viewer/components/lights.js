@@ -21,12 +21,12 @@ let year, month, day, hour, minutes, target, sphere;
 year = 2021;
 month = 6;
 day = 22;
-hour = 12;
+hour = 10;
 minutes = 0;
 let date = new Date(year, month, day, hour, minutes);
 //console.log(date);
 
-let coords = [55.67, 12.56];
+let coords = [56.67, 12.56];
 
 //spherical cords
 let sunPosition = SunCalc.getPosition(date, coords[0], coords[1]);
@@ -44,9 +44,9 @@ let sun = new Vector3(-x, -y, z);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //create lights
-const directionalLight = new DirectionalLight(0xffffff, 2.6);
+const directionalLight = new DirectionalLight(0xffffff, 1.8);
 const hemiLight = new HemisphereLight(0xffffff, 0x71748f, 0.8);
-const ambientLight = new AmbientLight(0xffffff, 1.6);
+const ambientLight = new AmbientLight(0xffffff, 1.7);
 // const spotLight1 = new SpotLight(0xffffff, 0);
 // const spotLight2 = new SpotLight(0xffffff, 0);
 

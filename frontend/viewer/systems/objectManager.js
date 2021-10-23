@@ -1,4 +1,4 @@
-import { Raycaster, Vector2, Vector3 } from "three";
+import { Raycaster, Vector2, Vector3, MeshStandardMaterial } from "three";
 import { materialSelected, materialStandard } from "../components/materials.js";
 
 class ObjectManager {
@@ -16,6 +16,13 @@ class ObjectManager {
     this.iotLayerIndex;
     this.iotToggle = null;
     this.transform = null;
+    this.sellMaterial = new MeshStandardMaterial({
+      color: 0xd1fae5,
+      side: 2,
+      flatShading: true,
+      transparent: true,
+      opacity: 1,
+    });
     this.container.addEventListener("dblclick", this.onMouseClick);
   }
 
@@ -158,6 +165,22 @@ class ObjectManager {
       this.updateMaterialToNonStandard(o);
     } else {
       o.material = materialStandard;
+
+      console.log(o.isAvailableForSell);
+
+      if (o.isAvailableForSell) {
+        o.material = this.sellMaterial;
+      }
+
+      if (o.context) {
+        o.material = new MeshStandardMaterial({
+          color: 0xcccccc,
+          side: 2,
+          flatShading: true,
+          transparent: true,
+          opacity: 0.8,
+        });
+      }
     }
   };
 
@@ -176,6 +199,10 @@ class ObjectManager {
       o.material = o.userData.attributes.legacyMaterial;
     } else {
       o.material = materialStandard;
+
+      if (o.isAvailableForSell) {
+        o.material = this.sellMaterial;
+      }
     }
   };
 
