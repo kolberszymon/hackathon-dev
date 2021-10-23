@@ -17,7 +17,7 @@ type NftItem = {
 let availableApartments = [
   {
     name: "Apartment #19",
-    description: "Cube.019_Cube.020",
+    description: "Cube.042_Cube.043",
     price: "10 ETH",
     isAvailableForSell: true,
   },
@@ -25,6 +25,24 @@ let availableApartments = [
     name: "Apartment #20",
     description: "Cube.020_Cube.021",
     price: "15 ETH",
+    isAvailableForSell: true,
+  },
+  {
+    name: "Apartment #20",
+    description: "Cube.108",
+    price: "20 ETH",
+    isAvailableForSell: true,
+  },
+  {
+    name: "Apartment #20",
+    description: "Cube.013_Cube.014",
+    price: "30 ETH",
+    isAvailableForSell: true,
+  },
+  {
+    name: "Apartment #20",
+    description: "Cube.137",
+    price: "17 ETH",
     isAvailableForSell: true,
   },
 ];
@@ -57,6 +75,8 @@ export default function Home() {
   }, [currentAcc]);
 
   useEffect(() => {
+    console.log(selectedApartment);
+
     setApartmentData(
       availableApartments.filter(
         (nft) => nft.description === selectedApartment
@@ -71,6 +91,8 @@ export default function Home() {
     viewer.loadObj("/citychain.obj", false);
     // @ts-ignore
     viewer.loadObj("/homechain_02.obj", true);
+
+    viewer.createListOfAvailableFlats(availableApartments);
   };
 
   const fetchNftByOwner = async () => {

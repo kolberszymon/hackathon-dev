@@ -214,8 +214,7 @@ class Viewer {
 
         if (selectable) {
           building = object;
-          that.createListOfFlats(object);
-
+          that.updateFlats(object);
           that.addObjects(object);
         }
         if (!selectable) {
@@ -232,16 +231,19 @@ class Viewer {
     );
   }
 
-  createListOfFlats(building) {
-    // console.log(building);
-    // const appartments = [];
-    building.children.forEach((f) => {
-      f.isAvailableForSell = Math.random() < 0.5;
+  createListOfAvailableFlats(availableApartaments) {
+    this.availableApartaments = availableApartaments.map((o) => o.description);
+  }
+  updateFlats(object) {
+    this.availableApartaments.forEach((name) => {
+      console.log(name);
 
-      // const flat = { name: f.name, mesh: f, isForSell: true };
-      // appartments.push(flat);
+      const availableFlatMesh = object.children.find((flat) => {
+        flat.name === name;
+      });
+
+      availableFlatMesh.isAvailableForSell = true;
     });
-    // console.log(appartments);
   }
 }
 

@@ -148,7 +148,6 @@ class ObjectManager {
   }
 
   updateObjects(objects) {
-    // console.log(objects);
     this.objectsArray = objects.children;
 
     for (let o of this.objectsArray) {
@@ -170,7 +169,7 @@ class ObjectManager {
     } else {
       o.material = materialStandard;
 
-      console.log(o.isAvailableForSell);
+      // console.log(o.isAvailableForSell);
 
       if (o.isAvailableForSell) {
         o.material = this.sellMaterial;
