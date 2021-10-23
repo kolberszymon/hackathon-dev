@@ -39,7 +39,9 @@ export default function Home() {
     const viewer = new Viewer(containerRef.current);
     console.log(viewer);
 
+    // @ts-ignore
     viewer.loadObj("/citychain.obj", false);
+    // @ts-ignore
     viewer.loadObj("/homechain_02.obj", true);
   };
 

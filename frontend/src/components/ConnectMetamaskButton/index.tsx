@@ -15,7 +15,7 @@ const MetaMaskButton: React.FC<MetaMaskButtonProps> = ({
 
   return (
     <button
-      className="bg-green-400 py-3 px-4 text-white rounded-2xl shadow-lg hover:bg-green-700 absolute bottom-4 right-4 uppercase font-bold"
+      className="bg-green-400 py-3 px-4 text-white rounded-2xl shadow-lg hover:bg-green-700 absolute bottom-4 left-4 uppercase font-bold z-50"
       onClick={() => handleClick()}
       onKeyDown={() => handleClick()}
       tabIndex={0}
