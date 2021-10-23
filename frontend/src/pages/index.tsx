@@ -45,6 +45,12 @@ let availableApartments = [
     price: "17 ETH",
     isAvailableForSell: true,
   },
+  {
+    name: "Apartment #20",
+    description: "Cube.002_Cube.146",
+    price: "99.9 ETH",
+    isAvailableForSell: true,
+  },
 ];
 
 export default function Home() {
