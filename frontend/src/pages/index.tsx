@@ -5,7 +5,7 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import { currentChainInfo } from "../constants/addresses";
 import { Viewer } from "../../viewer/viewer.js";
-
+import Sidebar from "../components/sidebar";
 
 type NftItem = {
   id: string;
@@ -23,14 +23,14 @@ export default function Home() {
 
   useEffect(() => {
     initThreeJs();
-  }, [])
+  }, []);
 
   useEffect(() => {
     // If there's no account connected -> do nothing
     if (!currentAcc) {
       return;
     }
-    
+
     // fetchNftByOwner();
   }, [currentAcc]);
 
@@ -41,7 +41,7 @@ export default function Home() {
 
     viewer.loadObj("/citychain.obj", false);
     viewer.loadObj("/homechain_02.obj", true);
-  }
+  };
 
   const fetchNftByOwner = async () => {
     // Get nft by owner https://api-reference.rarible.com/#operation/getNftItemsByOwner
@@ -81,7 +81,11 @@ export default function Home() {
     <div className="flex items-center p-4 mx-auto min-h-screen w-screen justify-center relative">
       <MetaMaskButton onClick={handleConnectWallet} accounts={accounts} />
       <div className="absolute flex h-full w-full justify-center">
-        <div ref={containerRef} className="w-full border-l-2 box-border bg-gray-500"></div>
+        <div
+          ref={containerRef}
+          className="w-full border-l-2 box-border bg-gray-500"
+        ></div>
+        <Sidebar />
       </div>
     </div>
   );
