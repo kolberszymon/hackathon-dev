@@ -7,8 +7,6 @@ import { onMounted } from "@vue/runtime-core";
 const container = ref(null);
 
 onMounted(() => {
-  console.log("test");
-  console.log(container.value);
   const viewer = new Viewer(container.value);
 });
 </script>
