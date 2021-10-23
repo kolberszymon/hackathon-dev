@@ -108,16 +108,14 @@ function createLights(scene, box) {
   directionalLight.shadow.mapSize.height = 2048;
 
   //to fix shadow acne
-  directionalLight.shadow.bias = 0.00001;
+  directionalLight.shadow.bias = -0.002;
   directionalLight.shadow.normalBias = 0.05;
-
   scene.add(directionalLight, ambientLight, hemiLight);
 
   //helper
   const helper = new CameraHelper(directionalLight.shadow.camera);
   helper.name = "Light";
   const helper2 = new DirectionalLightHelper(directionalLight, 5, 0x000000);
-  scene.add(helper, helper2);
 }
 
 //clean the code
