@@ -60,7 +60,6 @@ class ObjectManager {
         const ids = this.selected.map((e) => e.uuid).indexOf(object.uuid);
         this.selected.splice(ids, 1);
         this.updateMaterialToOriginal(object);
-
         //if not selected
       } else {
         if (this.selected[0]) {
@@ -68,6 +67,11 @@ class ObjectManager {
         }
         this.selected = [object];
         object.material = materialSelected;
+        // EVENT EMIT HERE
+        var apartmentChangeEvent = new CustomEvent("ApartmentChangeEvent", {
+          detail: this.selected[0].name,
+        });
+        window.dispatchEvent(apartmentChangeEvent);
       }
     }
 

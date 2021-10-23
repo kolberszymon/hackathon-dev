@@ -53,6 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     let accounts = await web3.eth.getAccounts();
     if (accounts && accounts.length > 0) {
       console.log(accounts[0]);
+      setAccounts(accounts);
       setCurrentAcc(accounts[0]);
     }
   };
